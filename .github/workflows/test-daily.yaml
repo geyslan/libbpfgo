@@ -1,0 +1,13 @@
+# Daily Tests
+name: libbpfgo (DAILY)
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Daily at 03:00
+    - cron: '0 3 * * *'
+  workflow_call:
+
+jobs:
+  pr:
+    uses: ./.github/workflows/pr.yaml
