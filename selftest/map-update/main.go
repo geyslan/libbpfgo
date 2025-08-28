@@ -45,6 +45,12 @@ func main() {
 		common.Error(errors.New("wrong map type"))
 	}
 
+	// Test that calling InnerMapInfo() on a regular map returns ErrNoInnerMap
+	_, err = testerMap.InnerMapInfo()
+	if !errors.Is(err, bpf.ErrNoInnerMap) {
+		common.Error(fmt.Errorf("expected ErrNoInnerMap for regular map, got: %v", err))
+	}
+
 	key1 := uint32(1)
 	value1 := struct{ x int }{50}
 	key1Unsafe := unsafe.Pointer(&key1)
